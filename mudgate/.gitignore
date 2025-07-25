@@ -1,0 +1,4 @@
+qr-bridge/.env
+qr-bridge/secrets.env
+keycloak/secrets.env
+*.png

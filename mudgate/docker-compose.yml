@@ -1,0 +1,26 @@
+services:
+  # ───────────────────────────── Keycloak ─────────────────────────────
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest     # pinned for reproducibility
+    env_file:
+      - ./keycloak/secrets.env                 # keeps secrets out of Git
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    command: start
+    # optional health-check (uncomment if you like)
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "http://localhost:8080/realms/master"]
+    #   interval: 30s
+    #   retries: 3
+
+  # ───────────────────────────── QR-Bridge ─────────────────────────────
+  # this was a test for our or own QR code bridge, but we are not using it at present
+  # qr-bridge:
+  #   image: registry.digitalocean.com/bernard-containers/qr-bridge:latest
+  #   container_name: qr-bridge
+  #   env_file:
+  #     - ./qr-bridge/secrets.env                 # runtime Redis creds
+  #   ports:
+  #     - "8000:8000"
+  #   restart: unless-stopped

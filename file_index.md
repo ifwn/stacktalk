@@ -6,9 +6,22 @@ INSTRUCTIONS:
 - BOTH inbox and outbox files should be well reviewed at all times. 
 - The order of the files listed in the inbox are meant to be quasi-chronological
 
+# This is an author comment
 
 PROJECT_INSTRUCTIONS.md
 inbox/initial_prompt.md
 inbox/copy_of_tennis_price_model_plan.md
 inbox/copy_of_tennis_price_model_plan_v_2.md
 inbox/copy_of_modern_react_electron_blueprint_v_2.md
+
+# NOW ONTO RESOURCES FOR A SPECIFIC QUESTION
+MUDGATE_VIT_QUESTION.md
+mudgate/vite_notes.md
+mudgate/readme.md
+mudgate/docker-compose.yml
+mudgate/deploy.sh
+mudgate/nginx/sites-available/bernard-labs
+mudgate/nginx/snippets/qr-bridge-location.conf
+mudgate/kingslander/Dockerfile
+mudgate/kingslander/pro.Dockerfile
+mudgate/kingslander/README.md

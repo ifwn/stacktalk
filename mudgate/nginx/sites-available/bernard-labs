@@ -1,0 +1,67 @@
+limit_req_zone $binary_remote_addr zone=qr:10m rate=10r/s;
+
+# HTTP → HTTPS
+server {
+    listen 80;
+    server_name bernard-labs.com *.bernard-labs.com;
+    return 301 https://$host$request_uri;
+}
+
+
+server {
+    listen 443 ssl;
+    http2 on;
+    server_name bernard-labs.com;
+
+    ssl_certificate     /etc/letsencrypt/live/bernard-labs.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/bernard-labs.com/privkey.pem;
+
+    # ──────── (NEW) Strict-Transport-Security ────────
+    add_header Strict-Transport-Security "max-age=63072000; includeSubDomains" always;
+
+    root   /opt/mudgate/kingslander/build;
+    index  index.html;
+
+    # --- HEALTH CHECK ------------------------------------------------
+    location = /ping {
+        add_header  Content-Type text/plain;
+        return 200 "pong\n";
+    }
+
+    location / {
+      try_files $uri $uri/ /index.html;
+    }
+}
+
+# HTTPS
+server {
+    listen 443 ssl;
+    http2 on;
+    server_name cloaking.bernard-labs.com;
+
+    ssl_certificate     /etc/letsencrypt/live/bernard-labs.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/bernard-labs.com/privkey.pem;
+
+    # ──────── (NEW) Strict-Transport-Security ────────
+    add_header Strict-Transport-Security "max-age=63072000; includeSubDomains" always;
+
+    # ──────── (NEW) Location for QR Bridge ─────────────
+    # Uncomment the next line (only) to enable the QR Bridge location.
+    # include /etc/nginx/snippets/qr-bridge-location.conf;
+    # requires the directory-level symlink: /etc/nginx/snippets/ → /opt/mudgate/nginx/snippets
+    # sudo ln -sf /opt/mudgate/nginx/snippets/ /etc/nginx/snippets/
+
+    # Keycloak UI & endpoints (everything except /qr-login*)
+    location / {
+        proxy_pass         http://127.0.0.1:8080;
+
+        # (same time-outs here are optional—but harmless if you add them)
+        proxy_connect_timeout 5s;
+        proxy_read_timeout    30s;
+
+        proxy_set_header Host              $host;
+        proxy_set_header X-Real-IP         $remote_addr;
+        proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto https;
+    }
+}
