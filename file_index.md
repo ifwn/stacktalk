@@ -24,4 +24,3 @@ mudgate/nginx/sites-available/bernard-labs
 mudgate/nginx/snippets/qr-bridge-location.conf
 mudgate/kingslander/Dockerfile
 mudgate/kingslander/pro.Dockerfile
-mudgate/kingslander/README.md
