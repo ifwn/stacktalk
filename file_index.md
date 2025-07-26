@@ -24,3 +24,14 @@ mudgate/nginx/sites-available/bernard-labs
 mudgate/nginx/snippets/qr-bridge-location.conf
 mudgate/kingslander/Dockerfile
 mudgate/kingslander/pro.Dockerfile
+mudgate/kingslander/jsconfig.json
+mudgate/kingslander/package.json
+mudgate/kingslander/vite.config.js
+mudgate/kingslander/.env
+mudgate/kingslander/.nvmrc
+mudgate/kingslander/index.html
+mudgate/kingslander/src/App.jsx
+mudgate/kingslander/src/App.css
+mudgate/kingslander/src/auth.js
+mudgate/kingslander/src/index.css
+mudgate/kingslander/src/main.jsx

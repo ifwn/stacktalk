@@ -1,5 +1,5 @@
-/*  App.js  */
-/*  src/App.js  */
+/*  App.jsx  */
+/*  src/App.jsx  */
 import React, { useEffect, useState } from 'react';
 import { keycloak, initKeycloak } from './auth';
 import logo from './logo.svg';
@@ -25,8 +25,8 @@ async function genChallenge(verifier) {
 /* ─────────────────────────────────── */
 
 function handleLogout() {
-  const authUrl  = process.env.REACT_APP_AUTH_URL;
-  const clientId = process.env.REACT_APP_AUTH_CLIENT_ID;
+  const authUrl  = import.meta.env.VITE_AUTH_URL;
+  const clientId = import.meta.env.VITE_AUTH_CLIENT_ID;
 
   // replace …/auth with …/logout and add redirect back to kings‑lander
   const logoutUrl =
