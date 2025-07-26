@@ -17,9 +17,9 @@ git pull --ff-only
 
 # ──────────────── NEW: build the static lander ────────────────
 echo "[lander] installing deps + building Kingslander…"
-pushd kingslander      # (/opt/mudgate/kingslander)
-npm ci                 # reproducible install
-npm run build          # outputs to  /opt/mudgate/kingslander/build
+pushd kingslander
+npm ci --prefer-offline
+npm run build          # Vite ⇒ outputs /opt/mudgate/kingslander/dist
 popd
 # ───────────────────────────────────────────────────────────────
 

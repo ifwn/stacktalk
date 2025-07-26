@@ -19,7 +19,7 @@ server {
     # ──────── (NEW) Strict-Transport-Security ────────
     add_header Strict-Transport-Security "max-age=63072000; includeSubDomains" always;
 
-    root   /opt/mudgate/kingslander/build;
+    root   /opt/mudgate/kingslander/dist;
     index  index.html;
 
     # --- HEALTH CHECK ------------------------------------------------

@@ -1,14 +1,13 @@
-# ---------- build stage ---------- #
-FROM node:20 AS builder
+# ---------- build stage ----------
+FROM node:22-alpine AS builder
 WORKDIR /app
-COPY package*.json .
+COPY package*.json ./
 RUN npm ci
 COPY . .
-# outputs /app/build
-RUN npm run build                
+RUN npm run build        # outputs /app/dist
 
-# ---------- runtime stage ---------- #
+# ---------- runtime stage ----------
 FROM nginx:alpine
-COPY --from=builder /app/build /usr/share/nginx/html
+COPY --from=builder /app/dist /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
